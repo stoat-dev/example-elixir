@@ -25,6 +25,7 @@ jobs:
           elixir-version: '1.14.2'
       - run: mix deps.get
       - run: mix test
+      - run: mix coveralls.html
       
       - run: pip3 install ansi2html
 
@@ -33,4 +34,3 @@ jobs:
 
       # generate sobelow static analysis and output to html file
       - run: script -q /dev/null mix sobelow -v | ansi2html --t Sobelow -a -s solarized > sobelow.html
-
