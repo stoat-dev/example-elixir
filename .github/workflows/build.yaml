@@ -26,6 +26,7 @@ jobs:
       - run: mix deps.get
       - run: mix test
       - run: mix coveralls.html
+      - run: mix doc
       
       - run: pip3 install ansi2html
 
