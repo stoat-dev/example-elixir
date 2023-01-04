@@ -25,9 +25,12 @@ jobs:
           elixir-version: '1.14.2'
       - run: mix deps.get
       - run: mix test
+      
+      - run: pip3 install ansi2html
 
       # generate credo static analysis and output to html file
-      - run: pip3 install ansi2html
       - run: script -q /dev/null mix credo --strict | ansi2html --t Credo -a -s solarized > credo.html
 
-      
+      # generate sobelow static analysis and output to html file
+      - run: script -q /dev/null mix sobelow -v | ansi2html --t Sobelow -a -s solarized > sobelow.html
+
