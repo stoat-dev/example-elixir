@@ -1,5 +1,9 @@
 on: push
 
+defaults:
+  run:
+    working-directory: hello
+
 jobs:
   test:
     runs-on: ubuntu-latest
