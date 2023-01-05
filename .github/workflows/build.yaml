@@ -32,7 +32,7 @@ jobs:
       - run: pip3 install ansi2html junit2html
 
       # generate html files from build outputs
-      - run: mix credo --strict > credo_output 
+      - run: mix credo --strict > credo_output || true
       - run: cat credo_output | ansi2html --t Credo -a -s solarized > credo.html
       - run: mix sobelow -v > sobelow_output
       - run: cat sobelow_output | ansi2html --t Sobelow -a -s solarized > sobelow.html
