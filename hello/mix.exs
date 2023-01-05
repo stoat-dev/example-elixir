@@ -7,7 +7,7 @@ defmodule Hello.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -59,7 +59,8 @@ defmodule Hello.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.8", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
-      {:ex_doc, "~> 0.13", only: :dev}
+      {:ex_doc, "~> 0.13", only: :dev},
+      {:junit_formatter, "~> 3.3", only: [:test]}
     ]
   end
 

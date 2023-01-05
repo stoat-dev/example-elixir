@@ -16,9 +16,6 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
       - uses: erlef/setup-beam@v1
         with:
           otp-version: '25'
@@ -28,10 +25,13 @@ jobs:
       - run: mix coveralls.html
       - run: mix doc
       
-      - run: pip3 install ansi2html
+      # install helpers
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip3 install ansi2html junit2html
 
-      # generate credo static analysis and output to html file
+      # generate html files from build outputs
       - run: script -q /dev/null mix credo --strict | ansi2html --t Credo -a -s solarized > credo.html
-
-      # generate sobelow static analysis and output to html file
       - run: script -q /dev/null mix sobelow -v | ansi2html --t Sobelow -a -s solarized > sobelow.html
+      - run: junit2html build/tests.xml tests.html
