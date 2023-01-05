@@ -32,6 +32,12 @@ jobs:
       - run: pip3 install ansi2html junit2html
 
       # generate html files from build outputs
-      - run: script -q /dev/null mix credo --strict | ansi2html --t Credo -a -s solarized > credo.html
-      - run: script -q /dev/null mix sobelow -v | ansi2html --t Sobelow -a -s solarized > sobelow.html
+      - run: mix credo --strict > credo_output || true
+      - run: cat credo_output | ansi2html --t Credo -a -s solarized > credo.html
+      - run: mix sobelow -v > sobelow_output
+      - run: cat sobelow_output | ansi2html --t Sobelow -a -s solarized > sobelow.html
       - run: junit2html build/tests.xml tests.html
+
+      - name: Run stoat action
+        uses: stoat-dev/stoat-action@v0
+        if: always()
