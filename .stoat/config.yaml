@@ -4,14 +4,14 @@ enabled: true
 plugins:
   job_runtime:
     enabled: true
- static_hosting:
-   test-results:
-     path: hello/tests.html
-   test-coverage:
-     path: hello/cover/excoveralls.html
-   docs:
-     path: hello/doc
-   credo-report:
-     path: hello/tests.html
-   sobelow-report:
-     path: hello/tests.html
+  static_hosting:
+    test-results:
+      path: hello/tests.html
+    test-coverage:
+      path: hello/cover/excoveralls.html
+    docs:
+      path: hello/doc
+    credo-report:
+      path: hello/tests.html
+    sobelow-report:
+      path: hello/tests.html
