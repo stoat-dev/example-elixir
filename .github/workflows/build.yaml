@@ -34,7 +34,6 @@ jobs:
       # generate html files from build outputs
       - run: script -q /dev/null mix credo --strict | ansi2html --t Credo -a -s solarized > credo.html
       - run: script -q /dev/null mix sobelow -v | ansi2html --t Sobelow -a -s solarized > sobelow.html
-
       - run: junit2html build/tests.xml tests.html
 
       - name: Run stoat action
