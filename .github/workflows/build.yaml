@@ -23,7 +23,7 @@ jobs:
       - run: mix deps.get
       - run: mix test
       - run: mix coveralls.html
-      - run: mix doc
+      - run: mix docs
       
       # install helpers
       - uses: actions/setup-python@v4
