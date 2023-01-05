@@ -1,0 +1,37 @@
+on: push
+
+defaults:
+  run:
+    working-directory: hello
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:latest
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '25'
+          elixir-version: '1.14.2'
+      - run: mix deps.get
+      - run: mix test
+      - run: mix coveralls.html
+      - run: mix docs
+      
+      # install helpers
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip3 install ansi2html junit2html
+
+      # generate html files from build outputs
+      - run: script -q /dev/null mix credo --strict | ansi2html --t Credo -a -s solarized > credo.html
+      - run: script -q /dev/null mix sobelow -v | ansi2html --t Sobelow -a -s solarized > sobelow.html
+      - run: junit2html build/tests.xml tests.html
