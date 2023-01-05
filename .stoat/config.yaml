@@ -12,6 +12,6 @@ plugins:
     docs:
       path: hello/doc
     credo-report:
-      path: hello/tests.html
+      path: hello/credo.html
     sobelow-report:
-      path: hello/tests.html
+      path: hello/sobelow.html
